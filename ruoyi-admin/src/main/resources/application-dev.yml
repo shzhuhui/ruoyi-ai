@@ -47,13 +47,11 @@ spring:
 spring.data:
   redis:
     # 地址
-    host: ${ruoyi-ai-redis-url-local}
+    host: 127.0.0.1
     # 端口，默认为6379
-    port: ${ruoyi-ai-redis-port-local}
+    port: 6379
     # 数据库索引
     database: 0
-    # 密码(如没有密码请注释掉)
-    password: ${ruoyi-ai-redis-password-local}
 
 --- # sms 短信
 sms:
