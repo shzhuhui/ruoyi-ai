@@ -1,5 +1,26 @@
 --- # 数据源配置
 spring:
+  # Azure配置
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          property-source-enabled: true
+          property-sources:
+            - endpoint: ${ENDPOINT_URL}
+              credential:
+                client-secret: ${AZURE_CLIENT_SECRET}
+                client-id: ${AZURE_CLIENT_ID}
+              profile:
+                cloud-type: ${AZURE_CLOUD_TYPE}
+                tenant-id: ${AZURE_TENANT_ID}
+              retry:
+                mode: exponential
+                exponential:
+                  max-retries: 4
+                  base-delay: PT0.0801S
+                  max-delay: PT9S
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
@@ -15,9 +36,9 @@ spring:
         master:
           type: ${spring.datasource.type}
           driverClassName: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/ruoyi-ai?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true
-          username: root
-          password: root
+          url: ${ruoyi-ai-url-local} # MySQL Connector/J 8.X 连接的示例
+          username: ${ruoyi-ai-username-local}
+          password: ${ruoyi-ai-password-local}
 
       hikari:
         # 最大连接池数量
@@ -37,19 +58,19 @@ spring:
         # 多久检查一次连接的活性
         keepaliveTime: 30000
   mail:
-    username: xx
+    username: HuiZhu
 
 --- # redis 单机配置(单机与集群只能开启一个另一个需要注释掉)
 spring.data:
   redis:
     # 地址
-    host: 127.0.0.1
+    host: ${ruoyi-ai-redis-url-local}
     # 端口，默认为6379
-    port: 6379
+    port: ${ruoyi-ai-redis-port-local}
     # 数据库索引
     database: 0
     # 密码(如没有密码请注释掉)
-    # password: 123456
+    password: ${ruoyi-ai-redis-password-local}
     # 连接超时时间
     timeout: 10S
 redisson:

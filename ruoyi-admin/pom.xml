@@ -18,6 +18,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-keyvault</artifactId>
+            <version>4.19.0</version>
+        </dependency>
+
         <!-- Mysql驱动包 -->
         <dependency>
             <groupId>com.mysql</groupId>
